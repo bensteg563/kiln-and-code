@@ -28,6 +28,33 @@
 
   populateLeadAttribution();
 
+  function sendEvent(name, params = {}) {
+    if (!window.gtag || getChoice() !== "granted") return;
+    window.gtag("event", name, params);
+  }
+
+  function bindAnalyticsEvents() {
+    document.querySelectorAll("[data-ga-event]").forEach((element) => {
+      element.addEventListener("click", () => {
+        sendEvent(element.dataset.gaEvent, {
+          event_label: element.dataset.gaLabel || element.textContent.trim().slice(0, 80)
+        });
+      });
+    });
+
+    const form = document.querySelector(".enquiry-form");
+    if (form) {
+      let started = false;
+      form.addEventListener("focusin", () => {
+        if (started) return;
+        started = true;
+        sendEvent("form_start", { form_name: "website_enquiry" });
+      });
+    }
+  }
+
+  bindAnalyticsEvents();
+
   function getChoice() {
     try { return localStorage.getItem(STORAGE_KEY); } catch (_) { return null; }
   }
