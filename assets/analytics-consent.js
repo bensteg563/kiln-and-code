@@ -15,6 +15,15 @@
     try { localStorage.setItem(STORAGE_KEY, value); } catch (_) {}
   }
 
+  function clearAnalyticsCookies() {
+    document.cookie.split(";").forEach((cookie) => {
+      const name = cookie.split("=")[0].trim();
+      if (!name.startsWith("_ga")) return;
+      document.cookie = name + "=; Max-Age=0; path=/; SameSite=Lax";
+      document.cookie = name + "=; Max-Age=0; path=/; domain=.kilnandcode.co.uk; SameSite=Lax";
+    });
+  }
+
   function loadAnalytics() {
     if (analyticsLoaded || window.__kilnCodeAnalyticsLoaded) return;
     analyticsLoaded = true;
@@ -57,7 +66,19 @@
   function setConsent(value) {
     saveChoice(value);
     hideBanner();
-    if (value === "granted") loadAnalytics();
+
+    if (value === "granted") {
+      loadAnalytics();
+      return;
+    }
+
+    if (analyticsLoaded || window.__kilnCodeAnalyticsLoaded) {
+      if (window.gtag) window.gtag("consent", "update", { analytics_storage: "denied" });
+      clearAnalyticsCookies();
+      window.setTimeout(() => window.location.reload(), 220);
+    } else {
+      clearAnalyticsCookies();
+    }
   }
 
   const choice = getChoice();
@@ -69,8 +90,5 @@
 
   acceptButton?.addEventListener("click", () => setConsent("granted"));
   declineButton?.addEventListener("click", () => setConsent("denied"));
-
-  settingsButtons.forEach((button) => {
-    button.addEventListener("click", () => showBanner());
-  });
+  settingsButtons.forEach((button) => button.addEventListener("click", showBanner));
 })();
