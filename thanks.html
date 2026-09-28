@@ -6,6 +6,7 @@
 <meta name="robots" content="noindex,follow">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <title>Thanks — Kiln & Code</title>
+<script src="/assets/analytics-consent.js" defer></script>
 <style>
 body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#f8fafc;color:#0f172a;display:grid;min-height:100vh;place-items:center;padding:24px}
 .card{max-width:680px;background:white;border:1px solid #e2e8f0;border-radius:24px;padding:42px;box-shadow:0 24px 60px rgba(15,23,42,.08)}
@@ -13,7 +14,13 @@ body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSy
 h1{font-size:42px;letter-spacing:-.04em;margin:12px 0}
 p{color:#64748b;font-size:18px;line-height:1.6}
 a{display:inline-block;margin-top:18px;background:#2563eb;color:#fff;text-decoration:none;font-weight:800;padding:13px 18px;border-radius:12px}
+.privacy-settings{margin-top:14px;border:0;background:none;color:#475569;text-decoration:underline;font:inherit;cursor:pointer}
+.cookie-banner{position:fixed;z-index:100;left:18px;right:18px;bottom:18px;max-width:880px;margin:auto;background:#fff;border:1px solid #e2e8f0;border-radius:18px;box-shadow:0 24px 70px rgba(15,23,42,.2);padding:20px;display:flex;align-items:center;justify-content:space-between;gap:22px;opacity:0;transform:translateY(12px);transition:opacity .18s ease,transform .18s ease}
+.cookie-banner.is-visible{opacity:1;transform:translateY(0)}
+.cookie-banner-copy strong{display:block;font-size:17px}.cookie-banner-copy p{margin:5px 0 0;color:#64748b;font-size:14px}.cookie-banner-copy a{display:inline;background:none;color:#2563eb;padding:0;margin:0;font-weight:700}
+.cookie-actions{display:flex;gap:10px;flex-wrap:wrap;flex:0 0 auto}.cookie-actions button{appearance:none;border:1px solid #cbd5e1;background:#fff;color:#0f172a;border-radius:11px;padding:11px 14px;font:inherit;font-weight:800;cursor:pointer}
+@media(max-width:700px){.cookie-banner{align-items:stretch;flex-direction:column}.cookie-actions{display:grid;grid-template-columns:1fr 1fr}.cookie-actions button{width:100%}}
 </style>
 </head>
-<body><main class="card"><span class="tag">Enquiry sent</span><h1>Thanks — I’ve got it.</h1><p>Your enquiry has been sent to Kiln & Code. I’ll reply from <strong>hello@kilnandcode.co.uk</strong>.</p><a href="/">Back to Kiln & Code</a></main></body>
+<body data-analytics-event="generate_lead"><main class="card"><span class="tag">Enquiry sent</span><h1>Thanks — I’ve got it.</h1><p>Your enquiry has been sent to Kiln & Code. I’ll reply from <strong>hello@kilnandcode.co.uk</strong>.</p><a href="/">Back to Kiln & Code</a></main><button type="button" class="privacy-settings" data-cookie-settings>Cookie settings</button><div class="cookie-banner" data-cookie-banner hidden role="dialog" aria-label="Analytics cookie choices"><div class="cookie-banner-copy"><strong>Analytics cookies</strong><p>Google Analytics is off unless you accept it. It helps us understand which pages are useful. <a href="/#privacy">Privacy details</a>.</p></div><div class="cookie-actions"><button type="button" data-cookie-decline>Decline analytics</button><button type="button" data-cookie-accept>Accept analytics</button></div></div></body>
 </html>
