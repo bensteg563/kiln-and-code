@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /client-template/
 
 Sitemap: https://www.kilnandcode.co.uk/sitemap.xml
