@@ -7,6 +7,27 @@
   const declineButton = document.querySelector("[data-cookie-decline]");
   let analyticsLoaded = false;
 
+  function populateLeadAttribution() {
+    const form = document.querySelector(".enquiry-form");
+    if (!form) return;
+
+    const params = new URLSearchParams(window.location.search);
+    const values = {
+      utm_source: params.get("utm_source") || "",
+      utm_medium: params.get("utm_medium") || "",
+      utm_campaign: params.get("utm_campaign") || "",
+      landing_page: window.location.href.split("#")[0],
+      referrer: document.referrer || ""
+    };
+
+    Object.entries(values).forEach(([key, value]) => {
+      const input = form.querySelector(`[data-attribution="${key}"]`);
+      if (input) input.value = value;
+    });
+  }
+
+  populateLeadAttribution();
+
   function getChoice() {
     try { return localStorage.getItem(STORAGE_KEY); } catch (_) { return null; }
   }
